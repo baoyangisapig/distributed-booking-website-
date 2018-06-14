@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
+
+<link rel="stylesheet" type="text/css" href="css/zhifu.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+<body>
+
+<script>
+    function getQueryString(name) {
+        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+
+    var bank=getQueryString("bank");
+    var id=getQueryString("id");
+    var money=getQueryString("money")
+    var company=getQueryString("company");
+    var username=getQueryString("username")
+</script>
+
+    <div class="header">
+        <div class="all_w ">
+            <div class="gofh">
+                <a href="#">
+                    <img src="images/jt_03.jpg"></a>
+            </div>
+        </div>
+    </div>
+    <div class="wenx_xx">
+        <div class="mz"><p id="yhname"></p></p></div>
+        <div class="zhifu_price" ><p id="num">99元</p></div></div>
+    </div>
+    <a href="javascript:void(0);" class="ljzf_but all_w">立即支付</a>
+    <!--浮动层-->
+    <div class="ftc_wzsf">
+        <div class="srzfmm_box">
+            <div class="qsrzfmm_bt clear_wl">
+                <img src="images/xx_03.jpg" class="tx close fl">
+                <img src="images/jftc_03.png" class="tx fl">
+                <span class="fl">请输入支付密码</span></div>
+            <div class="zfmmxx_shop">
+                <div class="mz">机票购买</div>
+                <div class="zhifu_price"></div></div>
+            <ul class="mm_box">
+                <li></li><li></li><li></li><li></li><li></li><li></li>
+            </ul>
+        </div>
+        <div class="numb_box">
+            <div class="xiaq_tb">
+                <img src="images/jftc_14.jpg" height="10"></div>
+            <ul class="nub_ggg">
+                <li><a href="javascript:void(0);" class="zf_num">1</a></li>
+                <li><a href="javascript:void(0);" class="zj_x zf_num">2</a></li>
+                <li><a href="javascript:void(0);" class="zf_num">3</a></li>
+                <li><a href="javascript:void(0);" class="zf_num">4</a></li>
+                <li><a href="javascript:void(0);" class="zj_x zf_num">5</a></li>
+                <li><a href="javascript:void(0);" class="zf_num">6</a></li>
+                <li><a href="javascript:void(0);" class="zf_num">7</a></li>
+                <li><a href="javascript:void(0);" class="zj_x zf_num">8</a></li>
+                <li><a href="javascript:void(0);" class="zf_num">9</a></li>
+                <li><a href="javascript:void(0);" class="zf_empty">清空</a></li>
+                <li><a href="javascript:void(0);" class="zj_x zf_num">0</a></li>
+                <li><a href="javascript:void(0);" class="zf_del">删除</a></li>
+            </ul>
+        </div>
+        <div class="hbbj"></div>
+    </div>
+
+	<script type="text/javascript">
+	$(function(){
+		//出现浮动层
+		$(".ljzf_but").click(function(){
+			$(".ftc_wzsf").show();
+		});
+		//关闭浮动
+		$(".close").click(function(){
+			$(".ftc_wzsf").hide();
+			$(".mm_box li").removeClass("mmdd");
+			$(".mm_box li").attr("data","");
+			i = 0;
+		});
+			//数字显示隐藏
+		$(".xiaq_tb").click(function(){
+			$(".numb_box").slideUp(500);
+		});
+		$(".mm_box").click(function(){
+			$(".numb_box").slideDown(500);
+		});
+			//----
+		var i = 0;
+		$(".nub_ggg li .zf_num").click(function(){
+				
+			if(i<6){
+				$(".mm_box li").eq(i).addClass("mmdd");
+				$(".mm_box li").eq(i).attr("data",$(this).text());
+				i++
+				if (i==6) {
+				  setTimeout(function(){
+					var data = "";
+						$(".mm_box li").each(function(){
+						data += $(this).attr("data");
+					});
+						$(
+						    function()
+                            {
+                                $.post(
+                                    "http://localhost:8080/zhifu/valid",
+                                    {
+                                        bank:bank,
+                                        money:money,
+                                        company:company,
+                                        username:username,
+                                        zfpassword:data,
+                                        id:id
+                                    },function (data) {
+                                        if(data=="0")
+                                        {
+                                            alert("支付成功");
+                                            window.location.href="booking.html?username="+username
+                                        }
+                                        else
+                                        {
+
+                                            if(data=="1")
+                                            {
+                                                alert("余额不足");
+                                                window.location.href=window.location
+                                            }
+                                            if(data=="2")
+                                            {
+                                                alert("密码错误");
+                                                window.location.href=window.location
+                                            }
+                                            if(data=="3")
+                                            {
+                                                alert("密码错误");
+                                                window.location.href=window.location
+                                            }
+                                        }
+                                    }
+
+                                )
+                            }
+
+                        )
+
+
+
+
+				  },100);
+				};
+			} 
+		});
+			
+		$(".nub_ggg li .zf_del").click(function(){
+			if(i>0){
+				i--
+				$(".mm_box li").eq(i).removeClass("mmdd");
+				$(".mm_box li").eq(i).attr("data","");
+			}
+		});
+	
+		$(".nub_ggg li .zf_empty").click(function(){
+			$(".mm_box li").removeClass("mmdd");
+			$(".mm_box li").attr("data","");
+			i = 0;
+		});
+		 
+	});
+</script>
+<script>
+    $(
+        function()
+        {
+            document.getElementById("num").innerHTML=money+"元";
+            var bank1;
+            if(bank=="china")
+            {
+                bank1="中国银行";
+            }
+            if(bank=="nongye")
+            {
+                bank1="中国农业银行";
+            }
+            if(bank=="gongshang")
+            {
+                bank1="中国工商银行";
+            }
+            document.getElementById("yhname").innerHTML=bank1;
+        }
+
+
+    )
+</script>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>usst安全卫士为你全程保卫安全</p>
+
+</div>
+</body>
+</html>

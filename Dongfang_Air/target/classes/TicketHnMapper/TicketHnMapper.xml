@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usst.mapper.TicketHnMapper">
+    <select id="SelectAll" resultType="com.usst.pojo.TicketHn">
+        select * from hainan
+    </select>
+
+    <select id="SelectBySome" resultType="com.usst.pojo.TicketHn">
+        select * from hainan where level=#{0} and start=#{1} and end=#{2} and time=#{3}
+    </select>
+
+
+    <update id="UpdateAmount" >
+        update hainan set amount=amount-1 where id =#{0}
+    </update>
+</mapper>

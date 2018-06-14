@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebService Client test page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="./jquery-2.1.3.min.js"></script>
+    <script>
+        function sendWebServiceGet()
+        {
+            var getRegionCountryURL = 'http://ws.webxml.com.cn//WebServices/WeatherWS.asmx/getRegionCountry';
+            $.ajax({
+                url: getRegionCountryURL,
+                type: 'Get',
+                dataType: 'JSONP',
+                contentType: "text/xml; charset=utf-8",
+                success: function(data){
+                    console.log(data);
+                },
+                error: function(msg){
+                    console.log(msg);
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+
+
+
+<script>
+    document.write("<h1>Send WebService Get and Post:</h1>");
+</script>
+<div>
+    <input id="sendWebServiceGet" onclick="sendWebServiceGet();" type="button" value="SendGet">
+    </br>
+</div>
+</body>
+</html>

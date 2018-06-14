@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+
+
+
+</head>
+<body style="background: url(images/beijing.jpg)">
+<script>
+    function getQueryString(name) {
+        var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+
+ 	var id=getQueryString("id");
+    var username1=getQueryString("user");
+    var money=getQueryString("money");
+    var company=getQueryString("company");
+
+
+</script>
+<link href="css/share.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+
+
+</script>
+<!--<script language="javascript">
+    &lt;!&ndash;
+	function password()
+	{
+        bank = prompt("请输入密码:");
+        if (bank != null){
+
+		$.post(
+		    "http://localhost:8080/bank/zhifu",
+			{
+			    username:username,
+				money:money,
+				company:company,
+				bankpassword:bank
+			}
+
+		)
+        }else{
+            alert("已取消订单");
+        }
+	}
+
+    //&ndash;&gt;
+</script>-->
+<center>
+<div class="share-demo">
+	<a href="javascript:void(0)" class="share"><img src="images/share-ico.png" style="width: auto; height: auto; max-width:15%; max-height: 15%;"/></a>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/share.js"></script>
+<script  type="text/javascript">
+	$('.share').shareConfig({
+		Shade : true, //是否显示遮罩层
+		Event:'click', //触发事件
+		Content : 'Share', //内容DIV ID
+		Title : '站长素材' //显示标题
+	});
+</script>
+</center>
+
+</body>
+</html>

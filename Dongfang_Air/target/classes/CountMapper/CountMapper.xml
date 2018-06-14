@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usst.mapper.CountMapper">
+    <select id="SelectById"  resultType="String">
+        select username from demotable where id=#{0}
+    </select>
+
+</mapper>

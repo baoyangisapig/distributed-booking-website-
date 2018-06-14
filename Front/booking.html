@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+  <head>
+    <meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1.0, maximum-scale = 1.0, user-scalable = no" charset="UTF-8"/>
+
+    <title>FooTable Responsive Demo</title>
+      <link rel="stylesheet" type="text/css" href="css/look.css">
+<!--    <style type="text/css">
+        body { margin: 5px 10px;padding: 0; font-family:courier new; font-size:12px; }
+
+        .frame-border {
+          padding: 20px;
+        }
+        .device-selector {
+          text-align:center;
+        }
+
+        .device-selector a {
+          background: url(images/timg.jpg) no-repeat top left;
+          width: 100px; height: 98px;
+          margin:0 0px;
+          display:inline-block;
+     /*     border:solid 5px transparent;*/
+          border-radius:3px;
+        }
+
+          .device-selector a.tablet{ background-position: -1px 0; }
+          .device-selector a.tablet-landscape{ background-position: -96px 0; }
+          .device-selector a.mobile{ background-position: -534px 0; }
+          .device-selector a.mobile-landscape{ background-position: -288px 0; }
+          .device-selector a.desktop{ background-position: -424px 0; }
+          .device-selector a.next{background-position: -324px 0}
+          .device-selector a.soho{background-position: -219px 0}
+          .device-selector a.fir{background-position: -112px 0}
+            .device-selector a:hover {
+              background-color:#eee;
+            }
+
+            .device-selector a.chosen {
+              background-color:#ddd;
+            }
+
+        .demo-selector {
+          text-align:center;
+        }
+
+          .demo-selector p {
+            display:inline-block;
+          }
+
+          .demo-selector a {
+            text-decoration:none;
+            color:#00f;
+          }
+
+            .demo-selector a.chosen {
+              text-decoration:underline;
+              font-weight:bold;
+              color:#f00;
+            }
+
+          .demo-selector .demo-desc {
+            font-size:18px;
+            font-family:arial;
+          }
+
+        #demo-frame {
+          border: solid 3px #ddd;
+          width: 1024px;
+          height: 600px;
+          margin-left:50%;
+          position:fixed;
+          left:-512px;
+          border-radius:5px;
+        }
+
+    </style>   -->
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/selector.js">
+    </script>
+      <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+      <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+      <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="js/Dongfang/AjaxEast.js">
+      </script>
+
+      <script type="text/javascript" src="js/Hainan/AjaxHainan.js"></script>
+      <script type="text/javascript" src="js/Sichuan/AjaxSichuan.js">
+      </script>
+      <script type="text/javascript" src="js/Guoji/AjaxGuoji.js"></script>
+  </head>
+  <body style="background: url(images/bg.jpg)">
+  <script>
+      function getQueryString(name) {
+          var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+          if (result == null || result.length < 1) {
+              return "";
+          }
+          return result[1];
+      }
+
+      var username=getQueryString("username");
+      var password=getQueryString("password");
+  </script>
+  <script type="text/javascript" src="js/Dongfang/AJaxSearch.js">
+  </script>
+
+<p style="font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;font-size: 30px;background: lavender;color: mediumvioletred;font-style: italic">欢迎来到去哪儿网</p>
+
+  <div style="text-align: center;" class="form-inline">
+      <div class="btn-group-vertical"  >
+          <form class="form-horizontal">
+              <fieldset>
+                  <div id="legend">
+                      <legend>填写订单</legend>
+                  </div>
+
+                  <div class="control-group">
+                      <div class="controls  form-inline">
+                          <label class="control-label">出发地</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <select class="input-xlarge" id="start">
+                              <option value="北京">北京</option>
+                              <option value="上海">上海</option>
+                              <option value="广州">广州</option>
+                              <option value="武汉">武汉</option>
+                              <option></option></select>
+                      </div>
+                  </div>
+                  <div class="control-group form-inline">
+
+                      <div class="controls form-inline">
+                          <label class="control-label">目的地</label>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <select class="input-xlarge" id="end">
+                              <option value="北京">北京</option>
+                              <option value="上海">上海</option>
+                              <option value="广州">广州</option>
+                              <option value="武汉">武汉</option>
+                              <option></option></select>
+                      </div>
+
+                  </div><div class="control-group">
+
+
+
+                  <div class="controls form-inline">
+                      <label class="control-label" style="margin-left: 80px">航空公司选择</label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <select class="input-xlarge" id="company">
+                          <option value="guoji">中国国际航空公司</option>
+                          <option value="sichuan">四川航空</option>
+                          <option value="dongfang">东方航空</option>
+                          <option value="hainan">海南航空</option>
+                          <option></option></select>
+                  </div>
+
+                  <div class="controls form-inline">
+                      <label class="control-label" style="margin-left: 111px">起飞时间选择</label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="datetime-local" id="time" value="2015-09-24T13:00:00"/>
+                  </div>
+
+
+              </div><div class="control-group">
+
+                  <div class="controls form-inline">
+                      <label class="control-label" style="margin-left: 120px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;舱位</label>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <!-- Multiple Radios -->
+                      <label class="radio">
+                          <input name="group" type="radio" checked="checked" value="1">
+                          头等舱
+                      </label>
+                      <label class="radio">
+                          <input name="group" type="radio" value="2">
+                          商务舱
+                      </label>
+                      <label class="radio">
+                          <input name="group" type="radio" value="3">
+                          普通舱
+                      </label>
+                  </div>
+
+              </div>
+
+                  <div class="control-group form-inline">
+
+
+                      <!-- Button -->
+                      <div class="controls form-inline">
+                          <label class="control-label" >确认提交</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <input type="button" class="btn btn-info" id="btn" value="button">
+                      </div>
+                  </div>
+                  </br>
+                  <div class="control-group">
+
+
+                      <!-- Button -->
+                      <div class="controls form-inline">
+                          <label class="control-label">重置</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                          <button class="btn btn-warning">reset</button>
+                      </div>
+                  </div>
+
+              </fieldset>
+          </form>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <img src="images/time.jpg" style="text-align: center; width: auto; height: auto; max-width: 25%; max-height: 25%; ">
+      </div>
+    <div class="device-selector " >
+        <a class="fir" data-width="320px" data-height="480px" href="#mobile" id="guoji"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="mobile" data-width="320px" data-height="480px" href="#mobile" id="sichuan"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="soho" data-width="1224px" data-height="600px" href="#desktop"   id="dongfang" ></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="next" data-width="1224px" data-height="600px" href="#desktop" id="hainan" ></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+    <div class="demo-selector">
+
+<div style="text-align:center;clear:both">
+<p>所有票务信息来自各家航空公司的即时价格</p>
+
+</div>
+</div>
+    </div>
+    <div style="clear: both"></div>
+    <!--<div class="frame-border">
+      <iframe id="demo-frame" src="demo.htm"></iframe>
+    </div>-->
+<!--<ui id="biao">
+    <li>第一行</li>
+</ui>-->
+
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>起点</th>
+        <th>终点</th>
+        <th>舱位</th>
+        <th>价格</th>
+        <th>航班号</th>
+        <th>起飞时间</th>
+        <th>剩余票量</th>
+    </tr>
+    </thead>
+    <tbody id="biao">
+
+    </tbody>
+</table>
+    <div style="clear: both"></div>
+  </body>
+</html>

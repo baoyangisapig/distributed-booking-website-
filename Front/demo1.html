@@ -1,0 +1,56 @@
+<html>
+
+<meta charset="UTF-8">
+<title>Title</title>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script type="text/javascript" >
+    $(document).ready(
+        function()
+        {
+            $(function() {
+
+                /* Ajax post */
+                $('#submitbt').click(function() {
+                    var Username = $("#username").val();
+                    $.post("http://localhost:8080/demo/ajax", {
+                        username : Username,
+                    }, function(data) {
+                        //从后台传过来的数据    
+                        var data1=JSON.parse(data);
+                        alert(data1);
+                        for(i=0;i<data1.length;i++)
+                        {
+                            var str="<li>"+data1[i].username+"</li>";
+                            $('#biao').append(str);
+
+                        }
+                        alert(data);
+                    });
+                });
+                /* Ajax post */
+            });
+
+        }
+
+    );
+
+</script>
+
+
+<body>
+username:<input id="username" type="text"/>
+<button id="submitbt" >点击测试</button>
+<div><h3>未改变</h3></div>
+<ui id="biao">
+    <li>第一行</li>
+</ui>
+<script>
+    $('#biao').append("<li>"+"第二行"+"</li>")
+</script>
+    <script>
+        window.alert("测试");
+    </script>
+</body>
+</html>
+

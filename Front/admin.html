@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html >
+<meta charset="UTF-8">
+<head>
+    <title>Title</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        $(
+            function () {
+                $('#btn').click(function () {
+                    $.post(
+                        "http://localhost:8080/company/dongfang",
+                        {
+
+                        },
+                        function (data) {
+                            var data1=JSON.parse(data);
+                            var leveltable={"1":"头等舱","2":"商务舱","3":"普通舱"}
+                            $('#biao').html("");
+                            for(i=0;i<data1.length;i++)
+                            {
+
+                                start=data1[i].start;
+                                end=data1[i].end;
+                                level=data1[i].level;
+                                level1=leveltable[level];
+                                money=data1[i].money;
+                                flightnumber=data1[i].flightnumber;
+                                company=data1[i].name;
+                                time=data1[i].time;
+
+                                amount=data1[i].amount;
+                                key=i+1;
+                                var str="<tr><td>"+data1[i].start+"</td><td>"+end+"</td><td>"+level1+"</td><td><input value="+money+" id="+key+"money></td><td>"+flightnumber+"</td><td>"+time+"</td><td><input value="+amount+" id="+key+"amount></td><td><button id="+key+" class='btn-primary'>更新</button></td><tr>";
+                                $('#biao').append(str);
+                            }
+                        }
+
+
+
+                    )
+                })
+
+            }
+
+        )
+    </script>
+    <script>
+        $(
+            function () {
+                $("#biao").on('click','button',function () {
+                    var key=$(this).attr("id");
+                    var label1=key+"money";
+                    var label2=key+"amount";
+                    var money=$("#"+label1).val();
+                    var amount=$("#"+label2).val();
+
+                    $.post(
+                        "http://localhost:8080/company/renew",
+                        {
+                            id:key,
+                            money:money,
+                            amount:amount
+
+                        },
+                        function () {
+                            alert("更新成功");
+                        }
+
+
+                    ).error(
+                        function () {
+                            alert("更新失败");
+                        }
+                    )
+                });
+            }
+        )
+    </script>
+<!--    <script>
+        $(function () {
+            $("button").click(
+                alert("success")
+            )
+            }
+        )
+
+    </script>-->
+</head>
+<body>
+<p style="text-align: center;font-size: 350%;color: #2e2f33">东方航空票务后台管理</p>
+<button id="btn" class="btn-success">刷新票仓</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button id="btn1" class="btn">更新票仓</button>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>起点</th>
+        <th>终点</th>
+        <th>舱位</th>
+        <th>价格</th>
+        <th>航班号</th>
+        <th>起飞时间</th>
+        <th>剩余票量</th>
+        <th>更新</th>
+    </tr>
+    </thead>
+    <tbody id="biao">
+
+    </tbody>
+
+</table>
+</body>
+</html>
+
